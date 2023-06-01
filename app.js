@@ -12,28 +12,32 @@ app.get("/calculator/:num1/:operator/:num2", (request, response)=>{
     let number1 = request.params.num1;
     let number2 = request.params.num2;
     let operator = request.params.operator;
-
+    let text_operator; 
     let result;
 
     switch(operator) {
         case "add":
             result = Number(number1) + Number(number2);
+            text_operator = "plus"
             break;
         case "substract":
             result = number1 - number2;
+            text_operator = "minus"
             break;
         case "divide":
             result = number1 / number2;
+            text_operator = "divided by"
             break;
         case "multiply":
             result = number1 * number2;
+            text_operator = "multiplied by"
             break;
         default:
             result = 'no match';
     }
     
     let resultObject = {
-        "operation": `${number1} ${operator} ${number2}`,
+        "operation": `${number1} ${text_operator} ${number2}`,
         "result": result
     }
 
