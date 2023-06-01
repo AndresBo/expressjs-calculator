@@ -17,7 +17,7 @@ app.get("/calculator/:num1/:operator/:num2", (request, response)=>{
 
     switch(operator) {
         case "add":
-            result = number1 + number2;
+            result = Number(number1) + Number(number2);
             break;
         case "substract":
             result = number1 - number2;
