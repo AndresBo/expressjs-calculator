@@ -3,17 +3,23 @@ const express = require("express");
 //the webserver:
 const app = express();
 
+//handle incoming requests object as JSON Object
 app.use(express.json());
+//handle incoming requests object as strings or arrays
 app.use(express.urlencoded({extended: true}));
 
 
-
+// get route with three parameters
 app.get("/calculator/:num1/:operator/:num2", (request, response)=>{
     let number1 = request.params.num1;
     let number2 = request.params.num2;
     let operator = request.params.operator;
     let text_operator; 
     let result;
+
+    //error handling:
+    if (isNaN(number1) || isNaN(number2))
+        response.sendStatus(404);
 
     switch(operator) {
         case "add":
@@ -33,7 +39,7 @@ app.get("/calculator/:num1/:operator/:num2", (request, response)=>{
             text_operator = "multiplied by"
             break;
         default:
-            result = 'no match';
+            response.sendStatus(404);
     }
     
     let resultObject = {
